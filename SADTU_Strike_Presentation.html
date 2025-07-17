@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADTU National Strike - April 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+
+        .slide-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 1000px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: fadeInDown 1.2s ease-out;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 2em;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            animation: fadeInLeft 1.4s ease-out;
+        }
+
+        h3 {
+            color: #2980b9;
+            font-size: 1.5em;
+            margin: 15px 0;
+            animation: fadeInRight 1.6s ease-out;
+        }
+
+        p, li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            animation: fadeIn 1.8s ease-out;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            animation: zoomIn 1.5s ease-out;
+        }
+
+        .protest-image {
+            width: 300px;
+            height: 200px;
+            background: #e74c3c;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .protest-image:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            z-index: 1000;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #3498db;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            animation: slideInUp 1s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media print {
+            .navigation, .slide-counter { display: none; }
+            .slide { position: relative; page-break-after: always; }
+            .slide.active { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">10</span>
+        </div>
+
+        <!-- Slide 1: Title Slide -->
+        <div class="slide active">
+            <div class="slide-content">
+                <h1>SADTU National Strike</h1>
+                <h2 style="text-align: center; border: none;">April 2025</h2>
+                <div class="image-container">
+                    <div class="protest-image" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                        🏫 SADTU LOGO
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                        ✊ TEACHERS UNITE
+                    </div>
+                </div>
+                <div class="highlight">
+                    <h3 style="text-align: center; animation: none;">Computer Literacy Presentation</h3>
+                    <p style="text-align: center; font-size: 1.2em;">Understanding Labor Rights and Union Action</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Strike Choice and Justification -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>1. Why We Chose the SADTU Strike</h2>
+                <div class="image-container">
+                    <div class="protest-image" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                        📰 NATIONAL NEWS
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #27ae60, #229954);">
+                        🇿🇦 SOUTH AFRICA
+                    </div>
+                </div>
+                <div class="highlight">
+                    <h3>Key Reasons:</h3>
+                    <ul>
+                        <li><strong>National Impact:</strong> Affected thousands of learners and educators</li>
+                        <li><strong>Educational Crisis:</strong> Highlighted deep frustrations in public education</li>
+                        <li><strong>Union Influence:</strong> SADTU is one of SA's largest teacher unions</li>
+                        <li><strong>Social Importance:</strong> Reminded nation about treating teachers fairly</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Grievances -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>2. What Was the Strike About?</h2>
+                <div class="image-container">
+                    <div class="protest-image" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                        💰 SALARY ISSUES
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                        🏫 OVERCROWDING
+                    </div>
+                </div>
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <h3>💸 Financial Issues</h3>
+                        <p>Delayed salary adjustments and unpaid performance bonuses</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>🏗️ Infrastructure</h3>
+                        <p>Overcrowded classrooms and poor facilities in rural schools</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>👥 Staffing</h3>
+                        <p>Shortage of qualified support staff and teaching assistants</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>📋 Working Conditions</h3>
+                        <p>Non-compliance with national agreements and heavy admin loads</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Legal Strike Process - Steps -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>3a. Steps for a Legal Strike</h2>
+                <div class="image-container">
+                    <div class="protest-image" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+                        ⚖️ LEGAL PROCESS
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #1abc9c, #16a085);">
+                        📋 CCMA PROCESS
+                    </div>
+                </div>
+                <div class="highlight">
+                    <h3>Legal Steps Required:</h3>
+                    <ol style="font-size: 1.1em; line-height: 1.8;">
+                        <li><strong>Internal Resolution:</strong> Attempt to resolve with Department of Education</li>
+                        <li><strong>CCMA Referral:</strong> Refer dispute to CCMA or relevant bargaining council</li>
+                        <li><strong>Conciliation:</strong> CCMA tries to resolve within 30 days</li>
+                        <li><strong>Certificate:</strong> CCMA issues certificate of non-resolution</li>
+                        <li><strong>Notice:</strong> Union gives 48 hours written notice</li>
+                        <li><strong>Protected Strike:</strong> Only for matters of mutual interest</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Advantages and Disadvantages -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>3b. Advantages vs Disadvantages</h2>
+                <div class="image-container">
+                    <div class="protest-image" style="background: linear-gradient(135deg, #27ae60, #229954);">
+                        ✅ ADVANTAGES
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                        ❌ DISADVANTAGES
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div class="highlight" style="background: linear-gradient(120deg, #d5f4e6 0%, #80e27e 100%);">
+                        <h3 style="color: #27ae60;">✅ Advantages</h3>
+                        <ul>
+                            <li>Legal protection from dismissal</li>
+                            <li>Public awareness and pressure</li>
+                            <li>Collective solidarity</li>
+                            <li>Forces employer negotiation</li>
+                        </ul>
+                    </div>
+                    <div class="highlight" style="background: linear-gradient(120deg, #fadbd8 0%, #f1948a 100%);">
+                        <h3 style="color: #e74c3c;">❌ Disadvantages</h3>
+                        <ul>
+                            <li>Loss of salary during strike</li>
+                            <li>Disrupted teaching and learning</li>
+                            <li>Risk of violent clashes</li>
+                            <li>Potential loss of public sympathy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: What Happens During Strike -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>3c. What Happens in a Legal Strike</h2>
+                <div class="image-container">
+                    <div class="protest-image" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                        🚶‍♂️ PICKETING
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                        🤝 NEGOTIATIONS
+                    </div>
+                </div>
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <h3>🛑 Work Stoppage</h3>
+                        <p>Workers stop working and may march or picket lawfully</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>🛡️ Legal Protection</h3>
+                        <p>Strike is protected by labour law - no dismissals</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>💬 Media Engagement</h3>
+                        <p>Union leaders engage in interviews and meetings</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>📝 Resolution</h3>
+                        <p>Usually ends in written agreement or concessions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Union Representative Solution -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>4. As a Union Representative</h2>
+                <div class="image-container">
+                    <div class="protest-image" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+                        🤝 MEDIATION
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #1abc9c, #16a085);">
+                        📊 STRATEGY
+                    </div>
+                </div>
+                <div class="highlight">
+                    <h3>My Resolution Strategy:</h3>
+                    <ul style="font-size: 1.1em; line-height: 1.8;">
+                        <li><strong>Immediate Action:</strong> Reopen talks with Department of Basic Education</li>
+                        <li><strong>Financial Priority:</strong> Secure payment plan backed by Treasury</li>
+                        <li><strong>Infrastructure Timeline:</strong> Demand concrete deadlines for improvements</li>
+                        <li><strong>Accountability:</strong> Request independent audit of non-compliant provinces</li>
+                        <li><strong>Communication:</strong> Hold town hall meetings to update members</li>
+                        <li><strong>Legal Protection:</strong> Ensure strike remains peaceful and protected</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Importance of Union Membership -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>5. Why Belong to a Union?</h2>
+                <div class="image-container">
+                    <div class="protest-image" style="background: linear-gradient(135deg, #e67e22, #d35400);">
+                        🛡️ PROTECTION
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #8e44ad, #7d3c98);">
+                        💪 STRENGTH
+                    </div>
+                </div>
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <h3>🛡️ Rights Protection</h3>
+                        <p>Protects workers' rights and ensures fair treatment</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>⚖️ Legal Support</h3>
+                        <p>Representation in disputes and access to legal advice</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>🗣️ Collective Voice</h3>
+                        <p>Stronger negotiating power through unity</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>📚 Development</h3>
+                        <p>Training, workshops, and professional support services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Visual Impact Gallery -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Strike Impact: Visual Evidence</h2>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
+                    <div class="protest-image" style="background: linear-gradient(135deg, #e74c3c, #c0392b); height: 150px;">
+                        📢 PROTEST BANNERS
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #f39c12, #e67e22); height: 150px;">
+                        🏫 EMPTY CLASSROOMS
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #9b59b6, #8e44ad); height: 150px;">
+                        📰 MEDIA COVERAGE
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #27ae60, #229954); height: 150px;">
+                        ✊ SOLIDARITY MARCH
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #3498db, #2980b9); height: 150px;">
+                        🎤 UNION SPEECHES
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #1abc9c, #16a085); height: 150px;">
+                        🤝 NEGOTIATIONS
+                    </div>
+                </div>
+                <div class="highlight">
+                    <p style="text-align: center; font-size: 1.2em;">
+                        <strong>9 Visual Elements</strong> showcasing the comprehensive impact of the SADTU strike
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Conclusion -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Conclusion: Lessons Learned</h2>
+                <div class="image-container">
+                    <div class="protest-image" style="background: linear-gradient(135deg, #2c3e50, #34495e);">
+                        🎓 EDUCATION MATTERS
+                    </div>
+                    <div class="protest-image" style="background: linear-gradient(135deg, #e67e22, #d35400);">
+                        🤝 UNITY WORKS
+                    </div>
+                </div>
+                <div class="highlight">
+                    <h3>Key Takeaways:</h3>
+                    <ul style="font-size: 1.2em; line-height: 2;">
+                        <li><strong>Legal Process:</strong> Following proper procedures protects workers</li>
+                        <li><strong>Collective Action:</strong> Unity gives workers negotiating power</li>
+                        <li><strong>Education Impact:</strong> Teacher welfare directly affects learning quality</li>
+                        <li><strong>Social Responsibility:</strong> Fair treatment of educators benefits society</li>
+                    </ul>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <h3 style="color: #2c3e50;">Thank You for Your Attention!</h3>
+                    <p style="font-size: 1.1em; color: #7f8c8d;">Questions & Discussion Welcome</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prev-btn">Previous</button>
+        <button class="nav-btn" id="next-btn">Next</button>
+        <button class="nav-btn" id="print-btn">Print/Download</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const printBtn = document.getElementById('print-btn');
+            const currentSlideEl = document.getElementById('current-slide');
+            const totalSlidesEl = document.getElementById('total-slides');
+
+            let currentSlide = 0;
+
+            // Update total slides count
+            totalSlidesEl.textContent = totalSlides;
+
+            // Function to update slide display
+            function updateSlides() {
+                slides.forEach((slide, index) => {
+                    slide.classList.remove('active', 'prev');
+                    if (index === currentSlide) {
+                        slide.classList.add('active');
+                    } else if (index < currentSlide) {
+                        slide.classList.add('prev');
+                    }
+                });
+
+                // Update slide counter
+                currentSlideEl.textContent = currentSlide + 1;
+
+                // Update button states
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            // Event listeners for navigation
+            prevBtn.addEventListener('click', function() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlides();
+                }
+            });
+
+            nextBtn.addEventListener('click', function() {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateSlides();
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    if (currentSlide < totalSlides - 1) {
+                        currentSlide++;
+                        updateSlides();
+                    }
+                } else if (e.key === 'ArrowLeft') {
+                    if (currentSlide > 0) {
+                        currentSlide--;
+                        updateSlides();
+                    }
+                }
+            });
+
+            // Print/Download functionality
+            printBtn.addEventListener('click', function() {
+                window.print();
+            });
+
+            // Initialize
+            updateSlides();
+        });
+    </script>
+</body>
+</html>
